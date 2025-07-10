@@ -184,6 +184,16 @@ NEXTAUTH_URL="http://localhost:3000"
 
 ## 🚀 Deployment
 
+### Docker (Recommended)
+```bash
+# Build dan run dengan Docker Compose
+docker-compose up -d
+
+# Atau build manual
+docker build -t template-crud-app .
+docker run -p 3000:3000 template-crud-app
+```
+
 ### Vercel (Recommended)
 ```bash
 npm install -g vercel
@@ -282,4 +292,5 @@ Jika ada pertanyaan atau masalah, silakan buat issue di repository ini.
 ---
 
 **Happy Coding! 🚀**
+# template-nextjs-mysql
 # template-nextjs-mysql

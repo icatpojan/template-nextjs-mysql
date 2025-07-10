@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+    # MySQL Database
+    mysql:
+        image: mysql:8.0
+        container_name: template-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: myapp_db
+            MYSQL_USER: myapp_user
+            MYSQL_PASSWORD: myapp_password
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./mysql/init:/docker-entrypoint-initdb.d
+        networks:
+            - template-network
+
+    # Next.js Application
+    app:
+        build: .
+        container_name: template-app
+        restart: unless-stopped
+        ports:
+            - "3000:3000"
+        environment:
+            - DATABASE_URL=mysql://myapp_user:myapp_password@mysql:3306/myapp_db
+            - JWT_SECRET=your-super-secret-jwt-key
+            - NODE_ENV=development
+        depends_on:
+            - mysql
+        volumes:
+            - .:/app
+            - /app/node_modules
+        networks:
+            - template-network
+
+    # Prisma Studio (Optional)
+    prisma-studio:
+        build: .
+        container_name: template-prisma-studio
+        restart: unless-stopped
+        ports:
+            - "5555:5555"
+        environment:
+            - DATABASE_URL=mysql://myapp_user:myapp_password@mysql:3306/myapp_db
+        depends_on:
+            - mysql
+        command: npx prisma studio --hostname 0.0.0.0 --port 5555
+        networks:
+            - template-network
+
+volumes:
+    mysql_data:
+
+networks:
+    template-network:
+        driver: bridge
