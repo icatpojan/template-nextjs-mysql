@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import RouteGuard from "../components/RouteGuard";
 import { checkToken } from "../utils/auth";
@@ -8,11 +8,11 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
 
-    // Check login status for UI rendering
-    const { isValid } = checkToken();
-    if (isValid !== isLoggedIn) {
+    useEffect(() => {
+        // Check login status for UI rendering
+        const { isValid } = checkToken();
         setIsLoggedIn(isValid);
-    }
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("token");

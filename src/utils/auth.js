@@ -1,4 +1,9 @@
 export const checkToken = () => {
+    // Check if we're in browser environment
+    if (typeof window === "undefined") {
+        return { isValid: false, token: null };
+    }
+
     const token = localStorage.getItem("token");
     if (!token) return { isValid: false, token: null };
 

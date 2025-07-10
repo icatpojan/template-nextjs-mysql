@@ -1,13 +1,19 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "template-crud-auth-mysql",
+  "version": "1.0.0",
+  "description": "Template CRUD dengan Auth & MySQL Prisma - Next.js",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
+    "db:studio": "prisma studio",
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
     "@prisma/client": "^6.11.1",
@@ -23,5 +29,25 @@
   },
   "prisma": {
     "seed": "node prisma/seed.js"
-  }
+  },
+  "keywords": [
+    "nextjs",
+    "mysql",
+    "prisma",
+    "jwt",
+    "auth",
+    "crud",
+    "template",
+    "bootstrap"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/template-crud-auth-mysql"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/template-crud-auth-mysql/issues"
+  },
+  "homepage": "https://github.com/yourusername/template-crud-auth-mysql#readme"
 }

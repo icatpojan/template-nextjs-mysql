@@ -51,3 +51,37 @@ a {
     transform: rotate(360deg);
   }
 }
+
+/* Modal Backdrop Blur */
+.custom-modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 1040 !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  -moz-backdrop-filter: blur(8px) !important;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fallback untuk browser yang tidak mendukung backdrop-filter */
+@supports not (backdrop-filter: blur(8px)) {
+  .custom-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+  }
+}
